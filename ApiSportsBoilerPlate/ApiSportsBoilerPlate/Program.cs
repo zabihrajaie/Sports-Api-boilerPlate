@@ -15,7 +15,6 @@ namespace ApiSportsBoilerPlate
 {
     public class Program
     {
-        private const string SeedArgs = "/seed";
         public static async Task Main(string[] args)
         {
             var builder = CreateHostBuilder(args).Build();
@@ -58,15 +57,11 @@ namespace ApiSportsBoilerPlate
 
         private static async Task ApplyDbMigrationsWithDataSeedAsync(string[] args, IConfigurationRoot configuration, IHost host)
         {
-            var applyDbMigrationWithDataSeedFromProgramArguments = args.Any(x => x == SeedArgs);
-            if (applyDbMigrationWithDataSeedFromProgramArguments) args = args.Except(new[] { SeedArgs }).ToArray();
-
             bool.TryParse(configuration.GetSection("SeedConfiguration:ApplySeed").Value, out var applySeed);
             bool.TryParse(configuration.GetSection("DatabaseMigrationsConfiguration:ApplyDatabaseMigrations").Value, out var applyDatabaseMigrations);
 
             await DbMigrationHelpers
-                .ApplyDbMigrationsWithDataSeedAsync<CoreDbContext>(host,
-                    applyDbMigrationWithDataSeedFromProgramArguments, applySeed, applyDatabaseMigrations);
+                .ApplyDbMigrationsWithDataSeedAsync<CoreDbContext>(host,applySeed, applyDatabaseMigrations);
         }
     }
 }
