@@ -79,7 +79,7 @@ namespace ApiSportsBoilerPlate.API.v1
         [ProducesResponseType(typeof(ApiResponse), Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), Status404NotFound)]
         [ProducesResponseType(typeof(ApiResponse), Status422UnprocessableEntity)]
-        public async Task<ApiResponse> Put(long id, [FromBody] UpdatePersonRequest updateRequest)
+        public async Task<ApiResponse> Put(int id, [FromBody] UpdatePersonRequest updateRequest)
         {
             if (!ModelState.IsValid) { throw new ApiProblemDetailsException(ModelState); }
 

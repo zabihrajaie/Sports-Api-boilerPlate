@@ -1,3 +1,5 @@
+using System.Reflection;
+using ApiSportsBoilerPlate.Data.DataAccess;
 using ApiSportsBoilerPlate.Infrastructure.Configs;
 using ApiSportsBoilerPlate.Infrastructure.Extensions;
 using AspNetCoreRateLimit;
@@ -8,6 +10,7 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +29,11 @@ namespace ApiSportsBoilerPlate
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
+            services.AddDbContext<CoreDbContext>(options =>
+                options.UseSqlServer("data source=192.168.0.54;initial catalog=SportsTest;persist security info=True;user id=SSISUser;password=Sql2019;MultipleActiveResultSets=True;App=EntityFramework", sql => sql.MigrationsAssembly(migrationsAssembly)));
+
 
             //Register services in Installers folder
             services.AddServicesInAssembly(Configuration);

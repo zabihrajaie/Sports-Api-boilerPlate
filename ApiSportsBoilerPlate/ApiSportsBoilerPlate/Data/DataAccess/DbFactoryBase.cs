@@ -1,12 +1,12 @@
-﻿using Dapper;
-using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Dapper;
+using Microsoft.Extensions.Configuration;
 using static Dapper.SqlMapper;
 
-namespace ApiSportsBoilerPlate.Data
+namespace ApiSportsBoilerPlate.Data.DataAccess
 {
     public abstract class DbFactoryBase
     {
@@ -52,8 +52,8 @@ namespace ApiSportsBoilerPlate.Data
 
         public virtual async Task<(IEnumerable<T> Data, TRecordCount RecordCount)> DbQueryMultipleAsync<T, TRecordCount>(string sql, object parameters = null)
         {
-            IEnumerable<T> data = null;
-            TRecordCount totalRecords = default;
+            IEnumerable<T> data;
+            TRecordCount totalRecords;
 
             using (IDbConnection dbCon = DbConnection)
             {

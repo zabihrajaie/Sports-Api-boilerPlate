@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using ApiSportsBoilerPlate.Data.DataAccess;
 
 namespace ApiSportsBoilerPlate.Data.DataManager
 {
@@ -103,34 +104,32 @@ namespace ApiSportsBoilerPlate.Data.DataManager
 
         public async Task<bool> ExecuteWithTransactionScope()
         {
+            await using var dbCon = new SqlConnection(DbConnectionString);
+            await dbCon.OpenAsync();
+            var transaction = await dbCon.BeginTransactionAsync();
 
-            using (var dbCon = new SqlConnection(DbConnectionString))
+            try
             {
-                await dbCon.OpenAsync();
-                var transaction = await dbCon.BeginTransactionAsync();
+                //Do stuff here Insert, Update or Delete
+                Task q1 = dbCon.ExecuteAsync("<Your SQL Query here>");
+                Task q2 = dbCon.ExecuteAsync("<Your SQL Query here>");
+                Task q3 = dbCon.ExecuteAsync("<Your SQL Query here>");
 
-                try
-                {
-                    //Do stuff here Insert, Update or Delete
-                    Task q1 = dbCon.ExecuteAsync("<Your SQL Query here>");
-                    Task q2 = dbCon.ExecuteAsync("<Your SQL Query here>");
-                    Task q3 = dbCon.ExecuteAsync("<Your SQL Query here>");
+                await Task.WhenAll(q1, q2, q3);
 
-                    await Task.WhenAll(q1, q2, q3);
+                //Commit the Transaction when all query are executed successfully
 
-                    //Commit the Transaction when all query are executed successfully
-
-                    await transaction.CommitAsync();
-                }
-                catch (Exception ex)
-                {
-                    //Rollback the Transaction when any query fails
-                    transaction.Rollback();
-                    _logger.Log(LogLevel.Error, ex, "Error when trying to execute database operations within a scope.");
-
-                    return false;
-                }
+                await transaction.CommitAsync();
             }
+            catch (Exception ex)
+            {
+                //Rollback the Transaction when any query fails
+                await transaction.RollbackAsync();
+                _logger.Log(LogLevel.Error, ex, "Error when trying to execute database operations within a scope.");
+
+                return false;
+            }
+
             return true;
         }
 
