@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiSportsBoilerPlate", "ApiSportsBoilerPlate\ApiSportsBoilerPlate\ApiSportsBoilerPlate.csproj", "{35865502-3557-43F9-BD78-1BC40AF00EF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiSportsBoilerPlate.Test", "ApiSportsBoilerPlate\ApiSportsBoilerPlate.Test\ApiSportsBoilerPlate.Test.csproj", "{90EFC873-2620-49A7-A2D3-65199CB2CD42}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35865502-3557-43F9-BD78-1BC40AF00EF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35865502-3557-43F9-BD78-1BC40AF00EF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35865502-3557-43F9-BD78-1BC40AF00EF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35865502-3557-43F9-BD78-1BC40AF00EF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90EFC873-2620-49A7-A2D3-65199CB2CD42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90EFC873-2620-49A7-A2D3-65199CB2CD42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90EFC873-2620-49A7-A2D3-65199CB2CD42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90EFC873-2620-49A7-A2D3-65199CB2CD42}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2E5ABE0-97D5-40DF-B560-B63E27852BD5}
+	EndGlobalSection
+EndGlobal
