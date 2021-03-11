@@ -11,22 +11,19 @@ namespace ApiSportsBoilerPlate.Infrastructure.Helpers
 {
     public static class DbMigrationHelpers
     {
-        public static async Task ApplyDbMigrationsWithDataSeedAsync<TDbContext>(IHost host,
-            bool applyDbMigrationWithDataSeedFromProgramArguments, bool applySeed, bool applyDatabaseMigrations)
+        public static async Task ApplyDbMigrationsWithDataSeedAsync<TDbContext>(IHost host,bool applySeed, bool applyDatabaseMigrations)
             where TDbContext : DbContext, ICoreDbContext
         {
             using (var serviceScope = host.Services.CreateScope())
             {
                 var services = serviceScope.ServiceProvider;
 
-                if ((applyDatabaseMigrations)
-                    || (applyDbMigrationWithDataSeedFromProgramArguments))
+                if (applyDatabaseMigrations)
                 {
                     await EnsureDatabasesMigratedAsync<TDbContext>(services);
                 }
 
-                if ((applySeed)
-                    || (applyDbMigrationWithDataSeedFromProgramArguments))
+                if (applySeed)
                 {
                     await EnsureSeedDataAsync<TDbContext>(services);
                 }

@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 namespace ApiSportsBoilerPlate.Data.DataAccess
 {
     public class CoreDbContext : DbContext, ICoreDbContext
-    //DbContext
     {
         public CoreDbContext(DbContextOptions<CoreDbContext> options)
             : base(options) { }
